@@ -50,9 +50,8 @@
 
   <div *dxTemplate="let data of 'detail'">
     {{ data | primeiroNivelData}}
-    <div class="master-detail-caption">{{
-      data.data.cliente.nome
-      }}</div>
+    <div class="master-detail-caption">{{ data.data.cliente.nome }}</div>
+    <app-detail-grid></app-detail-grid>
   </div>
 
   <div *dxTemplate="let data of 'clienteCellTemplate'">{{ data.value ? data.value.nome : "não encontrado" }}</div>
