@@ -8,7 +8,15 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { CidadeEstadoComponent } from './shared/components/cidade-estado/cidade-estado.component';
-import {DxButtonModule, DxDataGridModule, DxListModule, DxSelectBoxModule, DxTreeListModule} from "devextreme-angular";
+import {
+    DxBoxModule,
+    DxButtonModule,
+    DxDataGridModule,
+    DxFormModule,
+    DxListModule,
+    DxSelectBoxModule, DxTextBoxModule,
+    DxTreeListModule
+} from "devextreme-angular";
 import {HttpClientModule} from "@angular/common/http";
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { ProdutosComponent } from './pages/produtos/produtos.component';
@@ -45,7 +53,10 @@ import { DetailGridComponent } from './shared/components/detail-grid/detail-grid
         DxTreeListModule,
         DxListModule,
         DxButtonModule,
-        DxoGridModule
+        DxoGridModule,
+        DxFormModule,
+        DxTextBoxModule,
+        DxBoxModule
     ],
   providers: [
     AuthService,

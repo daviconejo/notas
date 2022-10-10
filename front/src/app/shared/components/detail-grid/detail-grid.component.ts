@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input} from '@angular/core';
 import {NotaService} from "../../services/nota.service";
 import {Nota} from "../../../model/nota";
 
@@ -11,15 +11,19 @@ export class DetailGridComponent implements AfterViewInit{
 
   @Input() id!: any;
 
-  notas!: Nota[];
+  nota!: Nota;
 
   constructor(private service: NotaService) {
   }
 
-   ngAfterViewInit(): void {
-    this.service.getNotas().subscribe(value => {
-      this.notas = value;
-    })
+   ngAfterViewInit() {
+
+    this.service.getById(this.id).subscribe(value => {
+      this.nota = value;
+      console.log(this.nota);
+    });
+
+
   }
 
 

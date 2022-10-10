@@ -1,33 +1,42 @@
-<dx-data-grid
-  [dataSource]="notas"
-  [columnAutoWidth]="true"
-  [showColumnLines]="true"
-  [showRowLines]="true"
-  [showBorders]="true"
->
-  <dxi-column dataField="numeroDaNota" alignment="center"></dxi-column>
-  <dxi-column dataField="data" dataType="date" alignment="center"></dxi-column>
-  <dxi-column dataField="cliente" cellTemplate="clienteCellTemplate" alignment="center"></dxi-column>
-  <dxi-column dataField="itensNota" cellTemplate="itensNotaCellTemplate" alignment="center"></dxi-column>
+<dx-form [formData]="nota" [readOnly]="true">
 
-  <div *dxTemplate="let data of 'clienteCellTemplate'">
-    {{ data.value.nome }}
+  <dxi-item itemType="group" [colCount]="2" cssClass="first-group">
+    <dxi-item dataField="numeroDaNota" [colSpan]="1">
+      <dxo-label text="Nº da Nota"></dxo-label>
+    </dxi-item>
+    <dxi-item dataField="data" editorType="dxDateBox" [colSpan]="1"></dxi-item>
+    <dxi-item dataField="cliente" template="clienteTemplate" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="itensNota" template="itensNotaTemplate" [colSpan]="2"></dxi-item>
+  </dxi-item>
+
+
+  <div *dxTemplate="let data of 'clienteTemplate'">
+    <dx-form [formData]="data.component.option('formData')[data.dataField]" [readOnly]="true">
+      <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+        <dxi-item dataField="codigo" ></dxi-item>
+        <dxi-item dataField="nome"></dxi-item>
+      </dxi-item>
+    </dx-form>
   </div>
 
-  <div *dxTemplate="let data of 'itensNotaCellTemplate'">
-    <dx-data-grid [dataSource]="data.value" >
-
-      <dxi-column dataField="numeroItem"></dxi-column>
-      <dxi-column dataField="produto" cellTemplate="produtoCellTemplate"></dxi-column>
-      <dxi-column dataField="quantidade"></dxi-column>
-      <dxi-column dataField="valorTotal"></dxi-column>
+  <div *dxTemplate="let data of 'itensNotaTemplate'">
+    <dx-data-grid
+      [dataSource]="data.component.option('formData')[data.dataField]"
+      [columnAutoWidth]="true"
+      [showColumnLines]="true"
+      [showRowLines]="true"
+      [showBorders]="true"
+    >
+      <dxi-column dataField="numeroItem" caption="Nº Item" alignment="center"></dxi-column>
+      <dxi-column dataField="produto" cellTemplate="produtoCellTemplate" alignment="center"></dxi-column>
+      <dxi-column dataField="quantidade" alignment="center"></dxi-column>
+      <dxi-column dataField="valorTotal" alignment="center"></dxi-column>
 
 
       <div *dxTemplate="let data of 'produtoCellTemplate'">
         {{ data.value.descricao }}
       </div>
-
     </dx-data-grid>
   </div>
-</dx-data-grid>
+</dx-form>
 
