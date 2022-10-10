@@ -1,0 +1,34 @@
+<dx-data-grid
+    [dataSource]="notas"
+    [columnAutoWidth]="true"
+    [showColumnLines]="true"
+    [showRowLines]="true"
+    [showBorders]="true"
+
+  >
+    <dxi-column dataField="numeroDaNota" alignment="center"></dxi-column>
+    <dxi-column dataField="data" dataType="date" alignment="center"></dxi-column>
+    <dxi-column dataField="cliente" cellTemplate="clienteCellTemplate" alignment="center"></dxi-column>
+    <dxi-column dataField="itensNota" cellTemplate="itensNotaCellTemplate" alignment="center"></dxi-column>
+
+    <div *dxTemplate="let data of 'clienteCellTemplate'">
+      {{ data.value.nome }}
+    </div>
+
+    <div *dxTemplate="let data of 'itensNotaCellTemplate'">
+      <dx-data-grid [dataSource]="data.value" >
+
+        <dxi-column dataField="numeroItem"></dxi-column>
+        <dxi-column dataField="produto" cellTemplate="produtoCellTemplate"></dxi-column>
+        <dxi-column dataField="quantidade"></dxi-column>
+        <dxi-column dataField="valorTotal"></dxi-column>
+
+      </dx-data-grid>
+    </div>
+
+    <div *dxTemplate="let data of 'produtoCellTemplate'">
+      {{ data.value.descricao }}
+    </div>
+  </dx-data-grid>
+</div>
+

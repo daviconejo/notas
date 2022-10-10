@@ -1,0 +1,24 @@
+<div class="dx-fieldset">
+  <div class="dx-field">
+    <div class="dx-field-value">
+      <dx-select-box
+        [dataSource]="estados"
+        displayExpr="sigla"
+        placeholder="Estado"
+        [showClearButton]="true"
+        name="estadoBox"
+        (onValueChanged)="onValueChanged($event)"
+      ></dx-select-box>
+    </div>
+  </div>
+  <div class="dx-field">
+    <div class="dx-field-value">
+      <dx-select-box
+        [dataSource]="cidades"
+        displayExpr="nome"
+        placeholder="Cidade"
+        [showClearButton]="true"
+      ></dx-select-box>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="notas"
+  [showBorders]="true"
+  (onInitNewRow)="onInitNewRowNota($event)"
+  (onRowInserted)="onNotaInserted($event)"
+  (onRowRemoved)="onNotaRemoved($event)"
+  (onRowUpdated)="onNotaUpdated($event)"
+
+>
+  <dxo-editing
+    mode="popup"
+    [allowAdding]="true"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+  >
+    <dxo-popup
+      title="Nota"
+      [showTitle]="true"
+      [width]="700"
+      [height]="550"
+    ></dxo-popup>
+
+    <dxo-form>
+      <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+        <dxi-item dataField="numeroDaNota">
+          <dxo-label text="Nº da Nota"></dxo-label>
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="data" editorType="dxDateBox"
+                  [editorOptions]="{invalidDateMessage: 'The date must have the following format: yyyy/dd/MM'}">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-item>
+        <dxi-item dataField="cliente">
+          <dxi-validation-rule type="required"></dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item dataField="itensNota" [colSpan]="2">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-item>
+    </dxo-form>
+  </dxo-editing>
+
+  <dxi-column dataField="numeroDaNota" caption="Nº da Nota" alignment="center"></dxi-column>
+  <dxi-column dataField="data" alignment="center"></dxi-column>
+  <dxi-column dataField="cliente" caption="Cliente" cellTemplate="clienteCellTemplate" alignment="center"
+              editCellTemplate="clienteEditCellTemplate"></dxi-column>
+  <dxi-column dataField="itensNota" editCellTemplate="itensNotaEditCellTemplate" [visible]="false"></dxi-column>
+  <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+
+  <div *dxTemplate="let data of 'detail'">
+    {{ data | primeiroNivelData}}
+    <div class="master-detail-caption">{{
+      data.data.cliente.nome
+      }}</div>
+  </div>
+
+  <div *dxTemplate="let data of 'clienteCellTemplate'">{{ data.value ? data.value.nome : "não encontrado" }}</div>
+
+  <div *dxTemplate="let data of 'clienteEditCellTemplate'">
+    <dx-select-box [dataSource]="clientes"
+                   [acceptCustomValue]="true"
+                   displayExpr="nome"
+                   [value]="data.value"
+                   (valueChange)="valueChange($event, data)">
+    </dx-select-box>
+  </div>
+
+  <div *dxTemplate="let data of 'itensNotaEditCellTemplate'">
+    <dx-data-grid
+      [dataSource]="data.value" (onSaving)="onSavingItem($event, data)">
+
+      <dxo-editing
+        mode="row"
+        [allowAdding]="true"
+        [allowUpdating]="true"
+        [allowDeleting]="true"
+      ></dxo-editing>
+
+      <dxi-column dataField="numeroItem">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column dataField="produto" cellTemplate="produtoCellTemplate" editCellTemplate="produtoEditCellTemplate">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column dataField="quantidade">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column dataField="valorTotal">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+
+      <div
+        *dxTemplate="let data of 'produtoCellTemplate'">{{ data.value ? data.value.descricao : "não encontrado" }}</div>
+
+      <div *dxTemplate="let data of 'produtoEditCellTemplate'">
+        <dx-select-box [dataSource]="produtos"
+                       [acceptCustomValue]="true"
+                       displayExpr="descricao"
+                       [value]="data.value"
+                       (valueChange)="valueChange($event, data)">
+        </dx-select-box>
+      </div>
+    </dx-data-grid>
+  </div>
+
+  <div *dxTemplate="let data of 'itensNotaCellTemplate'">
+    <dx-data-grid [dataSource]="data.value" >
+
+      <dxi-column dataField="numeroItem"></dxi-column>
+      <dxi-column dataField="produto" cellTemplate="produtoCellTemplate"></dxi-column>
+      <dxi-column dataField="quantidade"></dxi-column>
+      <dxi-column dataField="valorTotal"></dxi-column>
+
+    </dx-data-grid>
+  </div>
+
+
+</dx-data-grid>
