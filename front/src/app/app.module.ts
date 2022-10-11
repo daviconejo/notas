@@ -24,6 +24,7 @@ import { NotasComponent } from './pages/notas/notas.component';
 import { PrimeiroNivelDataPipe } from './shared/pipes/primeiro-nivel-data.pipe';
 import {DxoGridModule} from "devextreme-angular/ui/nested";
 import { DetailGridComponent } from './shared/components/detail-grid/detail-grid.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DetailGridComponent } from './shared/components/detail-grid/detail-grid
     ProdutosComponent,
     NotasComponent,
     PrimeiroNivelDataPipe,
-    DetailGridComponent
+    DetailGridComponent,
+    PageNotFoundComponent
   ],
     imports: [
         BrowserModule,

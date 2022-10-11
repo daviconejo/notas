@@ -10,6 +10,7 @@ import {CidadeEstadoComponent} from "./shared/components/cidade-estado/cidade-es
 import {ClientesComponent} from "./pages/clientes/clientes.component";
 import {ProdutosComponent} from "./pages/produtos/produtos.component";
 import {NotasComponent} from "./pages/notas/notas.component";
+import {PageNotFoundComponent} from "./shared/components/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -33,15 +34,18 @@ const routes: Routes = [
   },
   {
     path: 'clientes',
-    component: ClientesComponent
+    component: ClientesComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'produtos',
-    component: ProdutosComponent
+    component: ProdutosComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'notas',
-    component: NotasComponent
+    component: NotasComponent,
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'login-form',
@@ -65,7 +69,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home'
+    component: PageNotFoundComponent
   }
 ];
 
