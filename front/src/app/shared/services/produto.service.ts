@@ -18,11 +18,11 @@ export class ProdutoService {
   }
 
   create(produto: Produto) {
-    return this.http.post<Cliente>(this.API, produto).pipe(take(1));
+    return this.http.post<Produto>(this.API, produto).pipe(take(1));
   }
 
   update(produto: Produto) {
-    return this.http.put<Cliente>(`${this.API}/${produto.id}`, produto).pipe(take(1));
+    return this.http.put<Produto>(`${this.API}/${produto.id}`, produto).pipe(take(1));
   }
 
   delete(id: number) {

@@ -22,19 +22,19 @@ export class ProdutosComponent implements OnInit {
 
   onRowRemoved(e: any) {
     //console.log(e.key)
-    this.service.delete(e.key).subscribe(value => value = e.key);
+    this.service.delete(e.key.id).subscribe(value => value = e.key.id);
   }
 
   onRowInserted(e: any) {
-    console.log(e.data);
-    console.log('create')
+    // console.log(e.data);
+    // console.log('create')
     let produto = e.data;
-    this.service.create(produto).subscribe((value: Cliente) => value = produto);
+    this.service.create(produto).subscribe((value: Produto) => value = produto);
   }
 
   onRowUpdated(e: any) {
-    console.log(e.data);
-    console.log('update');
+    // console.log(e.data);
+    // console.log('update');
     let produto = e.data;
     this.service.update(produto).subscribe(value => value = produto);
   }

@@ -1,15 +1,11 @@
 package br.com.sonner.webservice.model;
 
-import br.com.sonner.webservice.repository.ProdutoRepository;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Produtos")
 public class Produto {
 
 	@Id
@@ -38,6 +34,10 @@ public class Produto {
 		return valorUnidade;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
@@ -50,14 +50,5 @@ public class Produto {
 		this.valorUnidade = valorUnidade;
 	}
 
-	public Produto atualizar(Long id, ProdutoRepository repository) {
-		Produto produto = repository.getReferenceById(id);
-
-		produto.setCodigo(this.codigo);
-		produto.setDescricao(this.descricao);
-		produto.setValorUnidade(this.valorUnidade);
-
-		return produto;
-	}
 
 }

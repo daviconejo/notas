@@ -59,7 +59,7 @@ public class NotaController {
 	
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<Nota> atualizarNota(@PathVariable Long id, @RequestBody Nota nota) {
+	public ResponseEntity<Nota> atualizarNota(@RequestBody Nota nota) {
 
 		nota = notaRepository.save(nota);
 		return ResponseEntity.ok().body(nota);

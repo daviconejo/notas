@@ -30,8 +30,8 @@ export class ClientesComponent implements OnInit {
   // }
 
   onRowRemoved(e: any) {
-    console.log(e.key)
-    this.clienteService.delete(e.key).subscribe(value => value = e.key);
+    // console.log(e.key)
+    this.clienteService.delete(e.key.id).subscribe(value => value = e.key.id);
   }
 
   onRowInserted(e: any) {

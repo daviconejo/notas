@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +33,6 @@ public class ProdutoController {
 	}
 	
 	@PostMapping
-	@Transactional
 	public ResponseEntity<Produto> criarProduto(@RequestBody Produto produto, UriComponentsBuilder uriBuilder) {
 		produtoRepository.save(produto);
 		
@@ -44,18 +41,13 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}")
-	@Transactional
-	public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
-		Optional<Produto> optional = produtoRepository.findById(id);
-		if (optional.isPresent()) {
-			produto = produto.atualizar(id, produtoRepository);
-			return ResponseEntity.ok(produto);
-		}
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto produto) {
+
+		produto = produtoRepository.save(produto);
+		return ResponseEntity.ok().body(produto);
 	}
 	
 	@DeleteMapping("/{id}")
-	@Transactional
 	public ResponseEntity<?> removerProduto(@PathVariable Long id) {
 		Optional<Produto> optional = produtoRepository.findById(id);
 		if (optional.isPresent()) {

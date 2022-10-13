@@ -1,7 +1,5 @@
 package br.com.sonner.webservice.model;
 
-import br.com.sonner.webservice.repository.ClienteRepository;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

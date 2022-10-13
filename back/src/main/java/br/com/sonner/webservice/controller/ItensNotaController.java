@@ -45,7 +45,7 @@ public class ItensNotaController {
 	
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<ItensNota> atualizarItensNota(@PathVariable Long id, @RequestBody ItensNota itensNota) {
+	public ResponseEntity<ItensNota> atualizarItensNota(@RequestBody ItensNota itensNota) {
 		itensNota = itensNotaRepository.save(itensNota);
 		return ResponseEntity.ok(itensNota);
 	}
